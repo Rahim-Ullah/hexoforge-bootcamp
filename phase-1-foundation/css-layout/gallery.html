@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Photography Gallery</title>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">Travel Gallery</a>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="nav-links">
+                <a href="#" class="active">Home</a>
+                <a href="#">Collections</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1>Amazing Travel Destinations</h1>
+
+        <!-- Photo Gallery -->
+        <div class="gallery">
+            <!-- Gallery Items -->
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1480796927426-f609979314bd?auto=format&fit=crop&w=1000&q=80"
+                    alt="Japan Temple">
+                <div class="image-overlay">
+                    <h3 class="image-title">Kyoto, Japan</h3>
+                    <p class="image-description">Ancient temples and traditional gardens</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1531804055935-76f44d7c3621?auto=format&fit=crop&w=1000&q=80"
+                    alt="Santorini">
+                <div class="image-overlay">
+                    <h3 class="image-title">Santorini, Greece</h3>
+                    <p class="image-description">White buildings and blue domes</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=1000&q=80"
+                    alt="Venice">
+                <div class="image-overlay">
+                    <h3 class="image-title">Venice, Italy</h3>
+                    <p class="image-description">Historic canals and architecture</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1516815231560-8f41ec531527?auto=format&fit=crop&w=1000&q=80"
+                    alt="Machu Picchu">
+                <div class="image-overlay">
+                    <h3 class="image-title">Machu Picchu, Peru</h3>
+                    <p class="image-description">Ancient Incan citadel</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=1000&q=80"
+                    alt="Maldives">
+                <div class="image-overlay">
+                    <h3 class="image-title">Maldives</h3>
+                    <p class="image-description">Tropical paradise and clear waters</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1513407030348-c983a97b98d8?auto=format&fit=crop&w=1000&q=80"
+                    alt="New York">
+                <div class="image-overlay">
+                    <h3 class="image-title">New York City, USA</h3>
+                    <p class="image-description">City that never sleeps</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    </script>
+</body>
+
+</html>

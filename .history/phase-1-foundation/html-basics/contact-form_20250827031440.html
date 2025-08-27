@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+</head>
+
+<body>
+    <header>
+        <h1>Contact Us</h1>
+        <p>Please fill out the form below to get in touch with us.</p>
+    </header>
+
+    <main>
+        <section>
+            <form action="#" method="POST" id="contactForm">
+                <!-- Personal Information -->
+                <fieldset>
+                    <legend>Personal Information</legend>
+
+                    <div>
+                        <label for="fullName">Full Name:</label>
+                        <input type="text" id="fullName" name="fullName" required minlength="3" maxlength="50">
+                    </div>
+
+                    <div>
+                        <label for="email">Email Address:</label>
+                        <input type="email" id="email" name="email" required
+                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                    </div>
+
+                    <div>
+                        <label for="phone">Phone Number:</label>
+                        <input type="tel" id="phone" name="phone" pattern="[0-9]{11}" placeholder="03XX-XXXXXXX">
+                    </div>
+                </fieldset>
+
+                <!-- Inquiry Details -->
+                <fieldset>
+                    <legend>Inquiry Details</legend>
+
+                    <div>
+                        <label for="subject">Subject:</label>
+                        <select id="subject" name="subject" required>
+                            <option value="" disabled selected>Please select a subject</option>
+                            <option value="general">General Inquiry</option>
+                            <option value="support">Technical Support</option>
+                            <option value="billing">Billing Question</option>
+                            <option value="feedback">Feedback</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="priority">Priority Level:</label>
+                        <select id="priority" name="priority" required>
+                            <option value="" disabled selected>Select Priority</option>
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="message">Your Message:</label>
+                        <textarea id="message" name="message" rows="5" required minlength="10" maxlength="500"
+                            placeholder="Please describe your inquiry..."></textarea>
+                    </div>
+                </fieldset>
+
+                <!-- Preferences -->
+                <fieldset>
+                    <legend>Preferences</legend>
+
+                    <div>
+                        <p>Preferred Contact Method:</p>
+                        <input type="checkbox" id="contactEmail" name="contactMethod" che value="email">
+                        <label for="contactEmail" checkbox>Email</label>
+
+                        <input type="checkbox" id="contactPhone" name="contactMethod" value="phone">
+                        <label for="contactPhone">Phone</label>
+                    </div>
+
+                    <div>
+                        <p>Newsletter Subscription:</p>
+                        <input type="radio" id="subscribe" name="newsletter" value="yes" required>
+                        <label for="subscribe">Yes, subscribe me</label>
+
+                        <input type="radio" id="noSubscribe" name="newsletter" value="no">
+                        <label for="noSubscribe">No, thanks</label>
+                    </div>
+                </fieldset>
+
+                <!-- File Upload -->
+                <fieldset>
+                    <legend>Attachments</legend>
+                    <div>
+                        <label for="attachment">Upload File (if any):</label>
+                        <input type="file" id="attachment" name="attachment" accept=".pdf,.doc,.docx,.jpg,.png">
+                    </div>
+                </fieldset>
+
+                <!-- Terms and Submit -->
+                <div>
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">I agree to the terms and conditions</label>
+                </div>
+
+                <div>
+                    <button type="submit">Submit Form</button>
+                    <button type="reset">Reset Form</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p><small>&copy; 2025 Contact Form. All rights reserved.</small></p>
+    </footer>
+</body>
+
+</html>
