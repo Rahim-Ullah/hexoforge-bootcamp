@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade Calculator</title>
+</head>
+
+<body>
+    <h1>Grade Calculator</h1>
+    <form id="gradeForm">
+        <label for="score">Enter your score (0-100):</label>
+        <input type="number" id="score" name="score" min="0" max="100" required>
+        <button type="submit">Calculate Grade</button>
+    </form>
+    <p id="result"></p>
+
+    <script>
+        //create a grade calculator that take multiple test scores and return the average, highest and lowest grade with showing success message, failure message and warning message, with showing their respective colors and returned grades
+        document.getElementById('gradeForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const score = parseFloat(document.getElementById('score').value);
+            const result = document.getElementById('result');
+            let grade;
+            let message;
+            let color;
+
+            if (score >= 90) {
+                grade = 'A';
+                message = 'Excellent work!';
+                color = 'green';
+            } else if (score >= 80) {
+                grade = 'B';
+                message = 'Good job!';
+                color = 'blue';
+            } else if (score >= 70) {
+                grade = 'C';
+                message = 'You passed.';
+                color = 'orange';
+            } else if (score >= 60) {
+                grade = 'D';
+                message = 'You need to improve.';
+                color = 'red';
+            } else {
+                grade = 'F';
+                message = 'Failed. Better luck next time.';
+                color = 'darkred';
+            }
+
+            result.textContent = `Your grade is ${grade}. ${message}`;
+            result.style.color = color;
+        });
+        
+    </script>
+</body>
+
+</html>

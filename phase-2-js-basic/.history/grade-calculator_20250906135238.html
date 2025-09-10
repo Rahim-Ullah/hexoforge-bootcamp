@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="number"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #result {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .component {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* MOzilla edition */
+        /* input[type="number"] {
+            -moz-appearance: textfield;
+        } */
+    </style>
+</head>
+
+<body>
+    <h1>Grade Calculator</h1>
+    <form id="scoreForm" onsubmit="return false;">
+        <label for="score">Enter your score (0-100):</label>
+        <input type="number" id="score" name="score" min="0" max="100" required>
+        <button type="button" id="addScoreBtn">Add</button>
+    </form>
+    <div class="component">
+        <h3>Scores Entered:</h3>
+        <ul id="scoreList"></ul>
+        <button id="showGradesBtn">Show Grades</button>
+        <button id="clearScoreBtn">Clear Score</button>
+    </div>
+    <p id="result"></p>
+
+    <script>
+        const scores = [];
+        const scoreInput = document.getElementById('score');
+        const scoreList = document.getElementById('scoreList');
+        const result = document.getElementById('result');
+        const addScoreBtn = document.getElementById('addScoreBtn');
+        const showGradesBtn = document.getElementById('showGradesBtn');
+        const clearScoreBtn = document.getElementById('clearScoreBtn');
+
+        function updateScoreList() {
+            scoreList.innerHTML = '';
+            scores.forEach((score, idx) => {
+                const li = document.createElement('li');
+                li.textContent = `Score ${idx + 1}: ${score}`;
+                scoreList.appendChild(li);
+            });
+        }
+
+        addScoreBtn.addEventListener('click', function () {
+            const val = parseFloat(scoreInput.value);
+            if (isNaN(val) || val < 0 || val > 100) {
+                result.textContent = 'Please enter a valid score between 0 and 100.';
+                result.style.color = 'red';
+                return;
+            }
+            scores.push(val);
+            updateScoreList();
+            result.textContent = '';
+            scoreInput.value = '';
+            scoreInput.focus();
+        });
+
+        showGradesBtn.addEventListener('click', function () {
+            if (scores.length === 0) {
+                result.textContent = 'Please add at least one score.';
+                result.style.color = 'red';
+                return;
+            }
+            const avg = (scores.reduce((a, b) => a + b, 0) / scores.length).toFixed(2);
+            const max = Math.max(...scores);
+            const min = Math.min(...scores);
+
+            // Determine grade and message based on average
+            let grade, message, color;
+            if (avg >= 90) {
+                grade = 'A';
+                message = 'Excellent work!';
+                color = 'green';
+            } else if (avg >= 80) {
+                grade = 'B';
+                message = 'Good job!';
+                color = 'blue';
+            } else if (avg >= 70) {
+                grade = 'C';
+                message = 'You passed.';
+                color = 'orange';
+            } else if (avg >= 60) {
+                grade = 'D';
+                message = 'You need to improve.';
+                color = 'purple';
+            } else {
+                grade = 'F';
+                message = 'You failed. Better luck next time!';
+                color = 'red';
+            }
+
+            result.innerHTML = `
+                <strong>Average Score:</strong> ${avg}<br>
+                <strong>Highest Score:</strong> ${max}<br>
+                <strong>Lowest Score:</strong> ${min}<br>
+                <strong>Grade:</strong> ${grade}<br>
+                <span>${message}</span>
+            `;
+            result.style.color = color;
+        });
+
+        //clear score button functionality
+        clearScoreBtn.addEventListener('click', function () {
+            scores.length = 0; // Clear the scores array
+            // updateScoreList(); // Update the displayed score list
+            result.innerHTML = '<p>List of Scores Cleared</p>'; // Clear the result message
+            result.innerHTML = '<p>List of Scores Cleared</p>'; // Clear the result message
+            scoreInput.value = ''; // Clear the input field
+            scoreInput.focus(); // Focus back on the input field
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Clock</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #121212;
+            color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .clock-container {
+            text-align: center;
+        }
+
+        #time {
+            font-size: 3em;
+            margin-bottom: 0.2em;
+        }
+
+        #date {
+            font-size: 1.2em;
+            margin-bottom: 1em;
+        }
+
+        select {
+            padding: 0.5em;
+            font-size: 1em;
+            background: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="clock-container">
+        <h1 id="time"></h1>
+        <p id="date"></p>
+        <select id="timezone">
+            <option value="Asia/Karachi">Pakistan (Karachi)</option>
+            <option value="Asia/Tokyo">Japan (Tokyo)</option>
+            <option value="Europe/London">UK (London)</option>
+            <option value="America/New_York">USA (New York)</option>
+            <option value="Asia/Kabul">Afghanistan (Kabul)</option>
+            <option value="Asia/New-Delhi">India (New_Delhi)</option>
+        </select>
+        <div class="format-options">
+            <label>Time Format:
+                <select id="timeFormat">
+                    <option value="12">12-hour</option>
+                    <option value="24">24-hour</option>
+                </select>
+            </label>
+
+            <label>Date Format:
+                <select id="dateFormat">
+                    <option value="long">Long</option>
+                    <option value="short">Short</option>
+                </select>
+            </label>
+
+            <label>
+                <input type="checkbox" id="useUTC" />
+                Show UTC Time
+            </label>
+        </div>
+    </div>
+    <script>
+        const timeEl = document.getElementById('time');
+        const dateEl = document.getElementById('date');
+        const timezoneSelect = document.getElementById('timezone');
+
+        function updateClock() {
+            const tz = timezoneSelect.value;
+            const now = new Date();
+
+            const optionsTime = {
+                hour: 'numeric',
+                minute: 'numeric',
+                second: 'numeric',
+                hour12: true,
+                timeZone: tz
+            };
+
+            const optionsDate = {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                timeZone: tz
+            };
+
+            const timeString = new Intl.DateTimeFormat('en-US', optionsTime).format(now);
+            const dateString = new Intl.DateTimeFormat('en-US', optionsDate).format(now);
+
+            timeEl.textContent = timeString;
+            dateEl.textContent = dateString;
+        }
+
+
+
+        // const timeEl = document.getElementById('time');
+        // const dateEl = document.getElementById('date');
+        // const timezoneSelect = document.getElementById('timezone');
+        const timeFormatSelect = document.getElementById('timeFormat');
+        const dateFormatSelect = document.getElementById('dateFormat');
+        const useUTCCheckbox = document.getElementById('useUTC');
+
+        function updateClock() {
+            const tz = useUTCCheckbox.checked ? 'UTC' : timezoneSelect.value;
+            const hour12 = timeFormatSelect.value === '12';
+            const dateStyle = dateFormatSelect.value;
+
+            const now = new Date();
+
+            const timeOptions = {
+                hour: 'numeric',
+                minute: 'numeric',
+                second: 'numeric',
+                hour12,
+                timeZone: tz
+            };
+
+            const dateOptions = dateStyle === 'long'
+                ? { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: tz }
+                : { year: 'numeric', month: 'numeric', day: 'numeric', timeZone: tz };
+
+            timeEl.textContent = new Intl.DateTimeFormat('en-US', timeOptions).format(now);
+            dateEl.textContent = new Intl.DateTimeFormat('en-US', dateOptions).format(now);
+        }
+
+        // Update on change
+        [timezoneSelect, timeFormatSelect, dateFormatSelect, useUTCCheckbox].forEach(el =>
+            el.addEventListener('change', updateClock)
+        );
+
+        setInterval(updateClock, 1000);
+        updateClock();
+
+
+
+
+        timezoneSelect.addEventListener('change', updateClock);
+        setInterval(updateClock, 1000);
+        updateClock(); // Initial call
+    </script>
+</body>
+
+</html>

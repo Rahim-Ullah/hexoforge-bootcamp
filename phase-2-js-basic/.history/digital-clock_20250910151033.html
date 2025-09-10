@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Clock</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #121212;
+            color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .clock-container {
+            text-align: center;
+        }
+
+        #time {
+            font-size: 3em;
+            margin-bottom: 0.2em;
+        }
+
+        #date {
+            font-size: 1.2em;
+            margin-bottom: 1em;
+        }
+
+        select {
+            padding: 0.5em;
+            font-size: 1em;
+            background: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="clock-container">
+        <h1 id="time"></h1>
+        <p id="date"></p>
+        <select id="timezone">
+            <option value="Asia/Karachi">Pakistan (Karachi)</option>
+            <option value="Asia/Tokyo">Japan (Tokyo)</option>
+            <option value="Europe/London">UK (London)</option>
+            <option value="America/New_York">USA (New York)</option>
+            <option value="Asia/Kabul">USA (New York)</option>
+        </select>
+    </div>
+    <script>
+        const timeEl = document.getElementById('time');
+        const dateEl = document.getElementById('date');
+        const timezoneSelect = document.getElementById('timezone');
+
+        function updateClock() {
+            const tz = timezoneSelect.value;
+            const now = new Date();
+
+            const optionsTime = {
+                hour: 'numeric',
+                minute: 'numeric',
+                second: 'numeric',
+                hour12: true,
+                timeZone: tz
+            };
+
+            const optionsDate = {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                timeZone: tz
+            };
+
+            const timeString = new Intl.DateTimeFormat('en-US', optionsTime).format(now);
+            const dateString = new Intl.DateTimeFormat('en-US', optionsDate).format(now);
+
+            timeEl.textContent = timeString;
+            dateEl.textContent = dateString;
+        }
+
+        timezoneSelect.addEventListener('change', updateClock);
+        setInterval(updateClock, 1000);
+        updateClock(); // Initial call
+    </script>
+</body>
+
+</html>
